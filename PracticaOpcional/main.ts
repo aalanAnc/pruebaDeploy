@@ -1,13 +1,16 @@
 import { ApolloServer } from "@apollo/server";
 import { startStandaloneServer } from "@apollo/server/standalone";
-
+import express from "npm:express@4.18.2";
 import { Mutation } from "./resolvers/mutation.ts";
 import { typeDefs } from "./gql/schema.ts";
 import mongoose from "npm:mongoose@8.0.3";
 import { Query } from "./resolvers/query.ts";
 
 // connecto to MongoDB
-await mongoose.connect("mongodb+srv://alananconaortiz:12345@practicaoptional.8u5fio9.mongodb.net/?retryWrites=true&w=majority");
+const MONGO_URL = "mongodb+srv://alananconaortiz:12345@practicaoptional.8u5fio9.mongodb.net/?retryWrites=true&w=majority";
+await mongoose.connect(MONGO_URL);
+const app = express();
+app.use(express.json());
 console.info("MongoDB connected");
 
 
